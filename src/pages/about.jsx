@@ -23,8 +23,8 @@ import { version } from "../version";
 const list = [
   {
     version: "1.0.0",
-    subheader: "Currently in development",
-    list: []
+    subheader: "Oct. 10th 2020",
+    list: ["First deploy", "ToDo List App"]
   }
 ];
 
