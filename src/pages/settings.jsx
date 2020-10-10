@@ -100,11 +100,11 @@ export const drawer = {
   title: "App settings"
 };
 
-function ColorDialog({ onPick, open, ...rest }) {
+function ColorDialog({ onPick, type, ...rest }) {
   const theme = useTheme();
 
   return (
-    <Dialog open={open} {...rest}>
+    <Dialog {...rest}>
       <DialogTitle>Pick a color</DialogTitle>
       <DialogContent>
         <Grid container justify="space-between">
@@ -131,7 +131,7 @@ function ColorDialog({ onPick, open, ...rest }) {
                 p={2}
                 bgcolor={str2color(color)}
                 color={theme.palette.getContrastText(
-                  str2color(color)[open === "primary" ? 500 : "A400"]
+                  str2color(color)[type === "primary" ? 500 : "A400"]
                 )}
                 onClick={() => onPick(color)}
                 style={{ cursor: "pointer" }}
