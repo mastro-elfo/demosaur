@@ -1,6 +1,7 @@
 {
   "name": "demosaur",
   "version": "1.0.0",
+  "homepage": "/demosaur",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
