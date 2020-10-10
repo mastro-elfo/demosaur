@@ -1,20 +1,35 @@
 {
   "name": "demosaur",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "gh-pages": "^3.1.0",
+    "lodash": "^4.17.20",
+    "notistack": "^1.0.1",
+    "prefix-si": "^1.2.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-markdown": "^4.3.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "uuid": "^8.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prebuild": "echo 'export const version = \"'`cat package.json | grep \"\\\"version\\\":\" | cut -d \":\" -f 2 | cut -d \"\\\"\" -f 2`'\";' > src/version.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "deploy": "gh-pages -d build",
+    "predeploy": "yarn run build",
+    "eject": "echo \"react-scripts eject\"",
+    "create-page": "sh ./src/mastro-elfo-mui/src/scripts/create-page.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
