@@ -3,6 +3,17 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardHeader,
+  // CardContent,
+  CardMedia,
+  Grid
+} from "@material-ui/core";
+
+import {
   Content,
   DrawerIconButton,
   DrawerLists,
@@ -73,7 +84,18 @@ function Component() {
           Dashboard
         </Header>
       }
-      content={<Content>Hello!</Content>}
+      content={
+        <Content>
+          <Grid container>
+            <AppGridCard
+              href="/todolist"
+              title="ToDo List"
+              subheader="An example of todo list app"
+              image={`${process.env.PUBLIC_URL}/static/todolist.png`}
+            />
+          </Grid>
+        </Content>
+      }
     />
   );
 }
@@ -83,3 +105,22 @@ export const route = {
   exact: true,
   component: Component
 };
+
+function AppGridCard({ href, title, subheader, image }) {
+  const { push } = useHistory();
+  return (
+    <Grid item>
+      <Card>
+        <CardActionArea onClick={() => push(href)}>
+          <CardHeader title={title} subheader={subheader} />
+          <CardMedia image={image} style={{ paddingTop: "56.25%" }} />
+        </CardActionArea>
+        <CardActions>
+          <Button color="primary" size="small" onClick={() => push(href)}>
+            Open
+          </Button>
+        </CardActions>
+      </Card>
+    </Grid>
+  );
+}
