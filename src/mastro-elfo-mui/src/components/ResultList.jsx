@@ -62,8 +62,8 @@ export default function ResultList({
 
                 <ListItemText primary={primary} secondary={secondary} />
 
-                {!!RightAction && rightAction}
-                {!RightAction && !!RightIcon && (
+                {!!rightAction && rightAction}
+                {!rightAction && !!RightIcon && (
                   <ListItemIcon>{RightIcon}</ListItemIcon>
                 )}
               </ListItem>
