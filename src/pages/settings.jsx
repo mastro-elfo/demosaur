@@ -105,7 +105,9 @@ function ColorDialog({ onPick, type, ...rest }) {
 
   return (
     <Dialog {...rest}>
-      <DialogTitle>Pick a color</DialogTitle>
+      <DialogTitle>
+        Pick a {type === "primary" ? "primary" : "secondary"} color
+      </DialogTitle>
       <DialogContent>
         <Grid container justify="space-between">
           {[
