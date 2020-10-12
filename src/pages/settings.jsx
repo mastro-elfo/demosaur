@@ -129,7 +129,7 @@ function ColorDialog({ onPick, type, ...rest }) {
             <Grid key={i} item xs={3}>
               <Box
                 p={2}
-                bgcolor={str2color(color)}
+                bgcolor={str2color(color)[type === "primary" ? 500 : "A400"]}
                 color={theme.palette.getContrastText(
                   str2color(color)[type === "primary" ? 500 : "A400"]
                 )}
