@@ -22,6 +22,18 @@ import { version } from "../version";
 
 const list = [
   {
+    version: "1.1.0",
+    subheader: "12 October 2020",
+    list: [
+      "Update `mastro-elfo-mui` to version 1.8.0",
+      ["Fix bug with `ResultList`"],
+      "Add primary or secondary to color picker title",
+      'Fix date pages/about: like "20 September 2020"',
+      "Fix settings background color in color picker",
+      "Fix `.gitignore` `todo* > todo.md`"
+    ]
+  },
+  {
     version: "1.0.0",
     subheader: "10 October 2020",
     list: ["First deploy", "ToDo List App"]
