@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { BackIconButton, Content, Header, Page } from "../mastro-elfo-mui/";
 import HelpIcon from "@material-ui/icons/Help";
 
@@ -9,16 +9,25 @@ function Component() {
       header={<Header LeftAction={<BackIconButton />}>Help</Header>}
       content={
         <Content>
-          <Typography variant="h6">
-            The app forgets the colors I choosed
-          </Typography>
-          <Typography color="textSecondary" paragraph>
-            This is only a demo app, and the color picker is only for
-            demostration purpose.
-          </Typography>
+          <QA
+            question="The app forgets the colors I choosed"
+            answer="This is only a demo app, and the color picker is only for
+            demostration purpose."
+          />
         </Content>
       }
     />
+  );
+}
+
+function QA({ question, answer }) {
+  return (
+    <Box>
+      <Typography variant="h6">{question}</Typography>
+      <Typography color="textSecondary" paragraph>
+        {answer}
+      </Typography>
+    </Box>
   );
 }
 
