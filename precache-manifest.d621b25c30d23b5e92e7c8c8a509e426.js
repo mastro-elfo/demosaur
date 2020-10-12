@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "aa3522d78bf906d4c57a0bfa996dedfc",
+    "revision": "a103fcf1a3f73cfb2cc6a4a7a85d4e25",
     "url": "/demosaur/index.html"
   },
   {
-    "revision": "eeaf1453a35ef2983908",
+    "revision": "08f08e2476482f77210c",
     "url": "/demosaur/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/demosaur/static/js/2.6172bf28.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "eeaf1453a35ef2983908",
-    "url": "/demosaur/static/js/main.c798f5d2.chunk.js"
+    "revision": "08f08e2476482f77210c",
+    "url": "/demosaur/static/js/main.caf9c04e.chunk.js"
   },
   {
     "revision": "a0c6bee958d22cbf9fcf",
