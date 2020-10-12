@@ -38,7 +38,11 @@ export default function Collection({
   CollectionProps = {
     title: "Collection",
     mapper: r => r,
-    SearchFieldProps: {}
+    SearchFieldProps: {},
+    ResultListProps: {
+      subheader: null,
+      mapper: r => r
+    }
   },
   ViewProps = {
     title: "View Item",
@@ -91,7 +95,8 @@ function CollectionPage({
   ),
   title = "Collection",
   mapper = r => r,
-  SearchFieldProps = {}
+  SearchFieldProps = {},
+  ResultListProps = { mapper: r => r, subheader: null }
 }) {
   const { push } = useHistory();
   const { enqueueSnackbar } = useSnackbar();
@@ -137,7 +142,18 @@ function CollectionPage({
               {...SearchFieldProps}
             />
           </Grid>{" "}
-          <ResultList results={results} mapper={mapper} />
+          <ResultList
+            results={results}
+            mapper={a => {
+              // TODO: // DEPRECATED: Remove in version 2.0
+              console.warn(
+                "`mapper` is deprecated, use `ResultListProps.mapper` instead. Will be removed in version 2.0"
+              );
+              return mapper(a);
+            }}
+            {...ResultListProps}
+            subheader={evaluate(ResultListProps.subheader, results)}
+          />
         </Content>
       }
     />

@@ -24,12 +24,13 @@ export default function Page({
   content = null,
   header = null,
   print = null,
-  topFab = true
+  topFab = true,
+  TopFabProps = {}
 }) {
   return (
     <Fragment>
       <NoPrint>
-        {topFab && <TopFab />}
+        {topFab && <TopFab {...TopFabProps} />}
         {!!header && header}
         {!!content && content}
       </NoPrint>
@@ -39,8 +40,9 @@ export default function Page({
 }
 
 Page.propTypes = {
-  topFab: PropTypes.bool,
   content: PropTypes.element,
   header: PropTypes.element,
-  print: PropTypes.element
+  print: PropTypes.element,
+  topFab: PropTypes.bool,
+  TopFabProps: PropTypes.object
 };

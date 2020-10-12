@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import {
   List,
@@ -26,7 +27,12 @@ import { Condition } from "./";
  * @param  {[type]} others    [description]
  * @return {[type]}           [description]
  */
-export default function({ subheader, mapper = r => r, results, ...others }) {
+export default function ResultList({
+  mapper = r => r,
+  results,
+  subheader,
+  ...others
+}) {
   return (
     <Condition show={results !== null && results !== undefined}>
       <List
@@ -38,18 +44,28 @@ export default function({ subheader, mapper = r => r, results, ...others }) {
             const {
               LeftIcon,
               RightIcon,
+              rightAction,
               primary,
               secondary,
               onClick,
               ...others
             } = mapper(r);
+            // TODO: // Deprecated: RightIcon, remove in version 2
+            if (!!RightIcon)
+              console.warn(
+                "RightIcon is deprecated and will be removed in next major version"
+              );
+
             return (
               <ListItem button={!!onClick} onClick={onClick} {...others}>
                 {!!LeftIcon && <ListItemIcon>{LeftIcon}</ListItemIcon>}
 
                 <ListItemText primary={primary} secondary={secondary} />
 
-                {!!RightIcon && <ListItemIcon>{RightIcon}</ListItemIcon>}
+                {!!RightAction && rightAction}
+                {!RightAction && !!RightIcon && (
+                  <ListItemIcon>{RightIcon}</ListItemIcon>
+                )}
               </ListItem>
             );
           })}
@@ -57,3 +73,9 @@ export default function({ subheader, mapper = r => r, results, ...others }) {
     </Condition>
   );
 }
+
+ResultList.propTypes = {
+  mapper: PropTypes.func,
+  results: PropTypes.array,
+  subheader: PropTypes.string
+};
