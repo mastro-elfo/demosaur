@@ -9,6 +9,7 @@ import { route as backup } from "./pages/backup";
 import { route as dashboard } from "./pages/dashboard";
 import { route as help } from "./pages/help";
 import { route as settings } from "./pages/settings";
+import { route as stock } from "./pages/stock";
 import { route as todolist } from "./pages/todolist";
 
 import { PaletteContext, str2color } from "./usePalette";
@@ -39,7 +40,7 @@ function App() {
         }}
         RouterProps={{
           Router: HashRouter,
-          routes: [about, backup, dashboard, help, settings, todolist]
+          routes: [about, backup, dashboard, help, settings, stock, todolist]
         }}
       />
     </PaletteContext.Provider>

@@ -29,6 +29,7 @@ import { drawer as backup } from "./backup";
 import { drawer as help } from "./help";
 import { drawer as settings } from "./settings";
 import { drawer as todolist } from "./todolist";
+import { drawer as stock } from "./stock";
 
 function Component() {
   const { push } = useHistory();
@@ -45,7 +46,13 @@ function Component() {
                     key: "pages",
                     header: "Pages",
                     leftFill: true,
-                    items: [{ onClick: () => push("/todolist"), ...todolist }]
+                    items: [
+                      { onClick: () => push("/todolist"), ...todolist },
+                      {
+                        onClick: () => push("/stock"),
+                        ...stock
+                      }
+                    ]
                   },
                   {
                     key: "actions",
@@ -86,12 +93,19 @@ function Component() {
       }
       content={
         <Content>
-          <Grid container>
+          <Grid container justify="space-evenly">
             <AppGridCard
               href="/todolist"
               title="ToDo List"
               subheader="An example of todo list app"
               image={`${process.env.PUBLIC_URL}/static/todolist.png`}
+            />
+
+            <AppGridCard
+              href="/stock"
+              title="Stock Products"
+              subheader="An example of app that collects items"
+              image={`${process.env.PUBLIC_URL}/static/stock.png`}
             />
           </Grid>
         </Content>
