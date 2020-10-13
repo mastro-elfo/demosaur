@@ -22,6 +22,20 @@ import { version } from "../version";
 
 const list = [
   {
+    version: "1.3.0",
+    subheader: "In development",
+    list: ["Update components (version 1.10.0)", ["Fix _dark mode_"]]
+  },
+  {
+    version: "1.2.0",
+    subheader: "13 October 2020",
+    list: [
+      "Create **stock** app",
+      "Show contrast between primary and secondary color in AppBar",
+      "Upgrade components (v1.9.0)"
+    ]
+  },
+  {
     version: "1.1.0",
     subheader: "12 October 2020",
     list: [
