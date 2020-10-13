@@ -44,7 +44,7 @@ function Component() {
       header={
         <Header
           LeftAction={<BackIconButton />}
-          RightActions={[<GradeIcon key="secondary" color="secondary" />]}
+          RightActions={<GradeIcon key="secondary" color="secondary" />}
         >
           Settings
         </Header>
