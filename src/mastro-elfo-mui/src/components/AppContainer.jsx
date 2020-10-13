@@ -34,33 +34,34 @@ export default function App({
   RouterProps = {},
   SuspenseProps = {},
   ThemeProps = {},
-  WrapperProps = {}
+  WrapperProps = { Children: [] }
 }) {
-  // TODO: can wrap everything in Wrapper:
-  /*
-  <Wrapper Children={[
-    { Child: ThemeWrapper, ...ThemeProps },
-    { Child: SuspenseWrapper, ...SuspenseProps },
-    { Child: ErrorWrapper },
-    { Child: NotifyWrapper, ...NotifyProps },
-    ...WrapperProps.Children
-  ]}>
-  <RouterWrapper {...RouterProps} />
-  </Wrapper>
-   */
   return (
-    <ThemeWrapper {...ThemeProps}>
-      <SuspenseWrapper {...SuspenseProps}>
-        <ErrorWrapper>
-          <NotifyWrapper {...NotifyProps}>
-            <Wrapper {...WrapperProps}>
-              <RouterWrapper {...RouterProps} />
-            </Wrapper>
-          </NotifyWrapper>
-        </ErrorWrapper>
-      </SuspenseWrapper>
-    </ThemeWrapper>
+    <Wrapper
+      Children={[
+        { Component: ThemeWrapper, ...ThemeProps },
+        { Component: SuspenseWrapper, ...SuspenseProps },
+        { Component: ErrorWrapper },
+        { Component: NotifyWrapper, ...NotifyProps },
+        ...WrapperProps.Children
+      ]}
+    >
+      <RouterWrapper {...RouterProps} />
+    </Wrapper>
   );
+  // return (
+  //   <ThemeWrapper {...ThemeProps}>
+  //     <SuspenseWrapper {...SuspenseProps}>
+  //       <ErrorWrapper>
+  //         <NotifyWrapper {...NotifyProps}>
+  //           <Wrapper {...WrapperProps}>
+  //             <RouterWrapper {...RouterProps} />
+  //           </Wrapper>
+  //         </NotifyWrapper>
+  //       </ErrorWrapper>
+  //     </SuspenseWrapper>
+  //   </ThemeWrapper>
+  // );
 }
 
 App.propTypes = {
