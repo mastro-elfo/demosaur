@@ -14,6 +14,7 @@ import {
 
 import { BackIconButton, Content, Header, Page } from "../mastro-elfo-mui/";
 
+import GradeIcon from "@material-ui/icons/Grade";
 import InvertColorsIcon from "@material-ui/icons/InvertColors";
 import PaletteIcon from "@material-ui/icons/Palette";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -40,7 +41,14 @@ function Component() {
 
   return (
     <Page
-      header={<Header LeftAction={<BackIconButton />}>Settings</Header>}
+      header={
+        <Header
+          LeftAction={<BackIconButton />}
+          RightActions={[<GradeIcon key="secondary" color="secondary" />]}
+        >
+          Settings
+        </Header>
+      }
       content={
         <Content>
           <List>
