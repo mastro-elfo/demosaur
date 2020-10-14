@@ -16,7 +16,7 @@ import {
   TextField
   // Typography
 } from "@material-ui/core";
-import { Collection } from "../mastro-elfo-mui/";
+import { Collection, pluralize } from "../mastro-elfo-mui/";
 
 import AllInboxIcon from "@material-ui/icons/AllInbox";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -34,6 +34,10 @@ function Component() {
       CollectionProps={{
         title: "Stocks",
         ResultListProps: {
+          subheader: r =>
+            r
+              ? `${r.length} ${pluralize(r.length, "stock", "stocks")} found`
+              : "",
           mapper: ({ active, description, id, name }) => ({
             key: id,
             primary: name,
