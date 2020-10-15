@@ -23,8 +23,14 @@ import { version } from "../version";
 const list = [
   {
     version: "1.3.0",
-    subheader: "In development",
-    list: ["Update components (version 1.10.0)", ["Fix _dark mode_"]]
+    subheader: "15 October 2020",
+    list: [
+      "Added `BottomNavigation` in ToDo app that allows",
+      ["Fill some random data", "Clear all data"],
+      "Update components (version 1.11.0)",
+      ["Fix _dark mode_"],
+      "Stock app shows length or results"
+    ]
   },
   {
     version: "1.2.0",
