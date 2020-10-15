@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { Fragment, createRef, useEffect, useState } from "react";
 import { BackIconButton, Content, Header, Page } from "../mastro-elfo-mui/";
 import ListIcon from "@material-ui/icons/List";
 
@@ -6,6 +6,8 @@ import { v1 } from "uuid";
 import { useSnackbar } from "notistack";
 
 import {
+  BottomNavigation,
+  BottomNavigationAction,
   Checkbox,
   IconButton,
   InputAdornment,
@@ -18,8 +20,11 @@ import {
   ListSubheader,
   TextField
 } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 
+import AddBoxIcon from "@material-ui/icons/AddBox";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import ClearAllIcon from "@material-ui/icons/ClearAll";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 const ref = createRef();
@@ -63,6 +68,17 @@ function Component() {
       setList(copy);
     } else {
       enqueueSnackbar("Item not found", { variant: "error" });
+    }
+  };
+
+  const handleBottomAction = (_, action) => {
+    if (action === "clear") {
+      setList([]);
+    } else if (action === "fill") {
+      const fill = mock
+        .slice(0, 10)
+        .map(i => ({ ...i, id: v1(), checked: Math.random() < 0.5 }));
+      setList([...list, ...fill]);
     }
   };
 
@@ -114,6 +130,19 @@ function Component() {
               />
             ))}
           </List>
+
+          <FixedBottomNavigation showLabels onChange={handleBottomAction}>
+            <BottomNavigationAction
+              label="Fill"
+              value="fill"
+              icon={<AddBoxIcon />}
+            />
+            <BottomNavigationAction
+              label="Clear"
+              value="clear"
+              icon={<ClearAllIcon />}
+            />
+          </FixedBottomNavigation>
         </Content>
       }
     />
@@ -141,6 +170,26 @@ function Item({ checked, id, text, onDelete, onToggle }) {
   );
 }
 
+function FixedBottomNavigation({ children, ...props }) {
+  const theme = useTheme();
+  return (
+    <Fragment>
+      <BottomNavigation
+        style={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          zIndex: theme.zIndex.appBar
+        }}
+        {...props}
+      >
+        {children}
+      </BottomNavigation>
+      <BottomNavigation />
+    </Fragment>
+  );
+}
+
 export const route = {
   path: "/todolist",
   exact: true,
@@ -154,3 +203,13 @@ export const drawer = {
   icon: <ListIcon />,
   title: "Open ToDo List app"
 };
+
+const mock = [
+  { text: "Climb Mount Everest" },
+  { text: "Learn a new programming language" },
+  { text: "Read a new book" },
+  { text: "Drink water" },
+  { text: "Eat healty food" },
+  { text: "Make new friends" },
+  { text: "Commit on GitHub" }
+];
