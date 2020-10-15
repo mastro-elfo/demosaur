@@ -32,11 +32,7 @@ export default function Page({
   return (
     <Fragment>
       <NoPrint>
-        <Paper
-          square
-          elevation={0}
-          style={{ position: "fixed", top: 0, bottom: 0, left: 0, right: 0 }}
-        >
+        <Paper square elevation={0} style={{ minHeight: "100%" }}>
           {topFab && <TopFab {...TopFabProps} />}
           {!!header && header}
           {!!content && content}
