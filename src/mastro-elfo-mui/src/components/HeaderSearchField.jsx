@@ -1,39 +1,34 @@
 import React from "react";
-import classNames from "classnames";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import SearchField from "./SearchField";
+import PropTypes from "prop-types";
 
-const useStyles = makeStyles(theme => ({
-  AppBarSearch: {
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
-    }
-  },
-  AppBarInput: {
-    color: "inherit"
-  }
-}));
+import { fade, useTheme } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+import SearchField from "./SearchField";
 
 /**
  * A `SearchField` styled to stay inside `Header`.
- * @param  {[type]} props [description]
- * @return {[type]}       [description]
+ * @param       {Object} [BoxProps={}] [description]
+ * @param       {[type]} rest          Forwarded to `SearchField`
+ * @constructor
  */
-export default function(props) {
-  const classes = useStyles();
+export default function HeaderSearchField({ BoxProps = {}, ...rest }) {
+  const theme = useTheme();
 
   return (
-    <SearchField
-      variant="standard"
-      InputProps={{
-        classes: {
-          root: classNames({ [classes.AppBarInput]: appBar })
-        },
-        ...(appBar && { disableUnderline: true })
-      }}
-      {...props}
-    />
+    <Box
+      bgcolor={fade(theme.palette.common.white, 0.15)}
+      borderRadius={theme.shape.borderRadius}
+      py={0.5}
+    >
+      <SearchField
+        variant="standard"
+        InputProps={{ disableUnderline: true }}
+        {...rest}
+      />
+    </Box>
   );
 }
+
+HeaderSearchField.propTypes = {
+  BoxProps: PropTypes.object
+};

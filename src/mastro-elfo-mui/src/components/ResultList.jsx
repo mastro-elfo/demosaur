@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 
 import { Condition } from "./";
+import { evaluate } from "../";
 
 /**
  * Organizes a List with optional SubHeader
@@ -36,7 +37,11 @@ export default function ResultList({
   return (
     <Condition show={results !== null && results !== undefined}>
       <List
-        subheader={!!subheader && <ListSubheader>{subheader}</ListSubheader>}
+        subheader={
+          !!subheader && (
+            <ListSubheader>{evaluate(subheader, results)}</ListSubheader>
+          )
+        }
         {...others}
       >
         {results &&

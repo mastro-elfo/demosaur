@@ -1,3 +1,4 @@
+export { default as clean } from "./clean";
 export { default as evaluate } from "./evaluate";
 export { default as pluralize } from "./pluralize";
 export { default as shorten } from "./shorten";

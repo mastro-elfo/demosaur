@@ -22,6 +22,7 @@ import {
 } from "./";
 
 import { evaluate } from "../utils";
+import { useSearchParams } from "../utils";
 
 /**
  * [Collection description]
@@ -37,7 +38,6 @@ export default function Collection({
   save = () => Promise.reject(new Error("No save function provided")),
   CollectionProps = {
     title: "Collection",
-    mapper: r => r,
     SearchFieldProps: {},
     ResultListProps: {
       subheader: null,
@@ -58,6 +58,21 @@ export default function Collection({
     render: () => {}
   }
 }) {
+  if (CollectionProps.mapper) {
+    // TODO: // DEPRECATED: Remove in version 2.0
+    console.warn(
+      "`CollectionProps.mapper` is deprecated, use `CollectionProps.ResultListProps.mapper` instead. Will be removed in version 2.0"
+    );
+    if (!CollectionProps.ResultListProps) {
+      CollectionProps.ResultListProps = {
+        mapper: CollectionProps.mapper
+      };
+    } else if (CollectionProps.ResultListProps.mapper(null) === null) {
+      // Check if `CollectionProps.ResultListProps.mapper` is default
+      CollectionProps.ResultListProps.mapper = CollectionProps.mapper;
+    }
+  }
+
   return (
     <Switch>
       <Route path={`/${cid}/v/:id`}>
@@ -94,7 +109,6 @@ function CollectionPage({
     new Error("No search function provided to CollectionPage")
   ),
   title = "Collection",
-  mapper = r => r,
   SearchFieldProps = {},
   ResultListProps = { mapper: r => r, subheader: null }
 }) {
@@ -142,18 +156,7 @@ function CollectionPage({
               {...SearchFieldProps}
             />
           </Grid>{" "}
-          <ResultList
-            results={results}
-            mapper={a => {
-              // TODO: // DEPRECATED: Remove in version 2.0
-              console.warn(
-                "`mapper` is deprecated, use `ResultListProps.mapper` instead. Will be removed in version 2.0"
-              );
-              return mapper(a);
-            }}
-            {...ResultListProps}
-            subheader={evaluate(ResultListProps.subheader, results)}
-          />
+          <ResultList results={results} {...ResultListProps} />
         </Content>
       }
     />
@@ -277,7 +280,8 @@ function EditPage({
 }
 
 function NewItem({ data: defaultData, ...others }) {
-  const [data, setData] = useState(defaultData);
+  const searchData = useSearchParams();
+  const [data, setData] = useState({ ...defaultData, ...searchData });
   return <NewPage data={data} setData={setData} {...others} />;
 }
 

@@ -20,7 +20,13 @@ import SearchIcon from "@material-ui/icons/Search";
  *
  * `onSearch` is called when a search happens (by clicking or typing) with the query string as first parameter and the "deburred" string as second.
  * @param       {Number} [delay=250] [description]
- * @param       {[type]} [onClear=(] [description]
+ * @param       {function} [onClear=()=>{}] [description]
+ * @param       {function} [onSearch] Returns a `Promise`
+ * @param       {bool}  [showClear] If `true` always show the *clear* button
+ * @param       {object}  [SearchButtonProps={}] [description]
+ * @param       {object}  [ClearButtonProps={}] [description]
+ * @param       {object}  [InputProps={}] Override `TextField` `InputProps`
+ * @param       {any} [others]  Forwarded to `TextField`
  * @constructor
  */
 export default function SearchField({
@@ -30,10 +36,14 @@ export default function SearchField({
   onClear = () => {},
   // Search callback
   onSearch = () => Promise.reject(new Error("No search function provided")),
-  // Search button props
-  SearchButtonProps = {},
+  //
+  showClear = false,
   // Clear button props
   ClearButtonProps = {},
+  // Override `InputProps`
+  InputProps = {},
+  // Search button props
+  SearchButtonProps = {},
   // Others are passed to TextField
   ...others
 }) {
@@ -116,7 +126,7 @@ export default function SearchField({
         ),
         endAdornment: (
           <InputAdornment position="end">
-            {!!query && (
+            {(showClear || !!query) && (
               <IconButton
                 title="Clear"
                 onClick={handleClear}
@@ -127,7 +137,8 @@ export default function SearchField({
               </IconButton>
             )}
           </InputAdornment>
-        )
+        ),
+        ...InputProps
       }}
       {...others}
     />

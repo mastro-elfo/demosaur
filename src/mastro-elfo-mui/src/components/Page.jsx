@@ -7,6 +7,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
+import { Paper } from "@material-ui/core";
+
 import { NoPrint, Print, TopFab } from "./";
 
 /**
@@ -30,9 +32,15 @@ export default function Page({
   return (
     <Fragment>
       <NoPrint>
-        {topFab && <TopFab {...TopFabProps} />}
-        {!!header && header}
-        {!!content && content}
+        <Paper
+          square
+          elevation={0}
+          style={{ position: "fixed", top: 0, bottom: 0, left: 0, right: 0 }}
+        >
+          {topFab && <TopFab {...TopFabProps} />}
+          {!!header && header}
+          {!!content && content}
+        </Paper>
       </NoPrint>
       <Print>{!!print && print}</Print>
     </Fragment>
