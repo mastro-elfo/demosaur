@@ -15,7 +15,7 @@ import {
   Header,
   NestedListTypography,
   Page
-} from "../mastro-elfo-mui/";
+} from "mastro-elfo-mui";
 
 import LogoIcon from "../assets/Logo";
 import { version } from "../version";

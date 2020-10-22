@@ -4,7 +4,7 @@ import { useSnackbar } from "notistack";
 
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
-import { BackIconButton, Content, Header, Page } from "../mastro-elfo-mui/";
+import { BackIconButton, Content, Header, Page } from "mastro-elfo-mui";
 
 import BackupIcon from "@material-ui/icons/Backup";
 import SaveBackupIcon from "@material-ui/icons/CloudDownload";

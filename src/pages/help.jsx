@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
-import { BackIconButton, Content, Header, Page } from "../mastro-elfo-mui/";
+import { BackIconButton, Content, Header, Page } from "mastro-elfo-mui";
 import HelpIcon from "@material-ui/icons/Help";
 
 function Component() {

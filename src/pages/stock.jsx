@@ -16,7 +16,7 @@ import {
   TextField
   // Typography
 } from "@material-ui/core";
-import { Collection, pluralize } from "../mastro-elfo-mui/";
+import { Collection, pluralize } from "mastro-elfo-mui";
 
 import AllInboxIcon from "@material-ui/icons/AllInbox";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";

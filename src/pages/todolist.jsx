@@ -1,5 +1,5 @@
 import React, { Fragment, createRef, useEffect, useState } from "react";
-import { BackIconButton, Content, Header, Page } from "../mastro-elfo-mui/";
+import { BackIconButton, Content, Header, Page } from "mastro-elfo-mui";
 import ListIcon from "@material-ui/icons/List";
 
 import { v1 } from "uuid";

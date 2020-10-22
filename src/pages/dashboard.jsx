@@ -19,7 +19,7 @@ import {
   DrawerLists,
   Header,
   Page
-} from "../mastro-elfo-mui/";
+} from "mastro-elfo-mui";
 
 // import BrokenImageIcon from "@material-ui/icons/BrokenImage";
 import GitHubIcon from "@material-ui/icons/GitHub";
