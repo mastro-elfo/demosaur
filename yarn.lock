@@ -6993,6 +6993,11 @@ markdown-escapes@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-escapes/-/markdown-escapes-1.0.4.tgz#c95415ef451499d7602b91095f3c8e8975f78535"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
 
+mastro-elfo-mui@^1.18.0:
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/mastro-elfo-mui/-/mastro-elfo-mui-1.18.0.tgz#69091ae0a8449f320c653fcb97cf3a400a1b4b87"
+  integrity sha512-6mUo58Xf1QkbzwhKNQvj42o27/3tWpsFaH7PoidzBRWwsOeSQQPqigBmBWElUhCLKmNkjqsJbn3YLGHbYOhD3Q==
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
