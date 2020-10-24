@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/demosaur/static/css/main.ae7ebc61.chunk.css",
-    "main.js": "/demosaur/static/js/main.9dc97c89.chunk.js",
-    "main.js.map": "/demosaur/static/js/main.9dc97c89.chunk.js.map",
+    "main.js": "/demosaur/static/js/main.2eb3c9c5.chunk.js",
+    "main.js.map": "/demosaur/static/js/main.2eb3c9c5.chunk.js.map",
     "runtime-main.js": "/demosaur/static/js/runtime-main.1a7c8ccf.js",
     "runtime-main.js.map": "/demosaur/static/js/runtime-main.1a7c8ccf.js.map",
-    "static/js/2.8ca13c7a.chunk.js": "/demosaur/static/js/2.8ca13c7a.chunk.js",
-    "static/js/2.8ca13c7a.chunk.js.map": "/demosaur/static/js/2.8ca13c7a.chunk.js.map",
+    "static/js/2.36883591.chunk.js": "/demosaur/static/js/2.36883591.chunk.js",
+    "static/js/2.36883591.chunk.js.map": "/demosaur/static/js/2.36883591.chunk.js.map",
     "index.html": "/demosaur/index.html",
-    "precache-manifest.deddb2a8c98678a16eb7c6aa7077bf69.js": "/demosaur/precache-manifest.deddb2a8c98678a16eb7c6aa7077bf69.js",
+    "precache-manifest.edc31fe8e58bf7f01d93f7b28943db88.js": "/demosaur/precache-manifest.edc31fe8e58bf7f01d93f7b28943db88.js",
     "service-worker.js": "/demosaur/service-worker.js",
     "static/css/main.ae7ebc61.chunk.css.map": "/demosaur/static/css/main.ae7ebc61.chunk.css.map",
-    "static/js/2.8ca13c7a.chunk.js.LICENSE.txt": "/demosaur/static/js/2.8ca13c7a.chunk.js.LICENSE.txt"
+    "static/js/2.36883591.chunk.js.LICENSE.txt": "/demosaur/static/js/2.36883591.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1a7c8ccf.js",
-    "static/js/2.8ca13c7a.chunk.js",
+    "static/js/2.36883591.chunk.js",
     "static/css/main.ae7ebc61.chunk.css",
-    "static/js/main.9dc97c89.chunk.js"
+    "static/js/main.2eb3c9c5.chunk.js"
   ]
 }
