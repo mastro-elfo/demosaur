@@ -26,6 +26,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 
 import { drawer as about } from "./about";
 import { drawer as backup } from "./backup";
+import { drawer as errorDash } from "./error";
 import { drawer as help } from "./help";
 import { drawer as settings } from "./settings";
 import { drawer as todolist } from "./todolist";
@@ -51,7 +52,8 @@ function Component() {
                       {
                         onClick: () => push("/stock"),
                         ...stock
-                      }
+                      },
+                      { onClick: () => push("/error"), ...errorDash }
                     ]
                   },
                   {

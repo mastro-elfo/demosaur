@@ -10,6 +10,7 @@ import { AppContainer } from "mastro-elfo-mui";
 import { route as about } from "./pages/about";
 import { route as backup } from "./pages/backup";
 import { route as dashboard } from "./pages/dashboard";
+import { route as errorPage } from "./pages/error";
 import { route as help } from "./pages/help";
 import { route as settings } from "./pages/settings";
 import { route as stock } from "./pages/stock";
@@ -30,7 +31,16 @@ function App() {
       }}
       RouterProps={{
         Router: HashRouter,
-        routes: [about, backup, dashboard, help, settings, stock, todolist]
+        routes: [
+          about,
+          backup,
+          dashboard,
+          errorPage,
+          help,
+          settings,
+          stock,
+          todolist
+        ]
       }}
     />
   );
