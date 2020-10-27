@@ -26,13 +26,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prestart": "node scripts/prestart.js",
     "build": "react-scripts build",
-    "prebuild": "echo 'export const version = \"'`cat package.json | grep \"\\\"version\\\":\" | cut -d \":\" -f 2 | cut -d \"\\\"\" -f 2`'\";' > src/version.js",
-    "test": "react-scripts test",
+    "prebuild": "node scripts/version.js",
     "deploy": "gh-pages -d build",
     "predeploy": "yarn run build",
-    "eject": "echo \"react-scripts eject\"",
-    "create-page": "sh ./src/mastro-elfo-mui/src/scripts/create-page.sh"
+    "test": "react-scripts test",
+    "eject": "echo \"react-scripts eject\""
   },
   "eslintConfig": {
     "extends": "react-app"
