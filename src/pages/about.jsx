@@ -22,6 +22,11 @@ import { version } from "../version";
 
 const list = [
   {
+    version: "1.6.0",
+    subheader: "Work in progress",
+    list: ["Upgraded components v1.22.0"]
+  },
+  {
     version: "1.5.0",
     subheader: "24 October 2020",
     list: ["[NEW] Page with a button that trows an error"]
