@@ -1,12 +1,17 @@
-import React, { Fragment, createRef, useEffect, useState } from "react";
-import { BackIconButton, Content, Header, Page } from "mastro-elfo-mui";
+import React, { createRef, useEffect, useState } from "react";
+import {
+  BackIconButton,
+  Content,
+  FixedBottomNavigation,
+  Header,
+  Page
+} from "mastro-elfo-mui";
 import ListIcon from "@material-ui/icons/List";
 
 import { v1 } from "uuid";
 import { useSnackbar } from "notistack";
 
 import {
-  BottomNavigation,
   BottomNavigationAction,
   Checkbox,
   IconButton,
@@ -20,7 +25,6 @@ import {
   ListSubheader,
   TextField
 } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
 
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -167,26 +171,6 @@ function Item({ checked, id, text, onDelete, onToggle }) {
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
-  );
-}
-
-function FixedBottomNavigation({ children, ...props }) {
-  const theme = useTheme();
-  return (
-    <Fragment>
-      <BottomNavigation
-        style={{
-          position: "fixed",
-          bottom: 0,
-          width: "100%",
-          zIndex: theme.zIndex.appBar
-        }}
-        {...props}
-      >
-        {children}
-      </BottomNavigation>
-      <BottomNavigation />
-    </Fragment>
   );
 }
 
