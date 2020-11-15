@@ -146,7 +146,7 @@ function Component() {
       }
       footer={
         <Footer separator={<BottomNavigation />}>
-          <BottomNavigation onChange={handleBottomAction}>
+          <BottomNavigation onChange={handleBottomAction} showLabels={true}>
             <BottomNavigationAction
               label="Fill"
               value="fill"
