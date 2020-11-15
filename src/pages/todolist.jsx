@@ -1,93 +1,88 @@
 import React, { createRef, useEffect, useState } from "react";
-import {
-  BackIconButton,
-  Content,
-  FixedBottomNavigation,
-  Header,
-  Page
-} from "mastro-elfo-mui";
-import ListIcon from "@material-ui/icons/List";
+import { BackIconButton, Content, Footer, Header, Page } from "mastro-elfo-mui";
+import List from "me-sortable";
 
 import { v1 } from "uuid";
-import { useSnackbar } from "notistack";
 
 import {
+  BottomNavigation,
   BottomNavigationAction,
   Checkbox,
   IconButton,
   InputAdornment,
-  List,
   ListItem,
-  // ListItemAvatar,
   ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
   ListSubheader,
-  TextField
+  TextField,
 } from "@material-ui/core";
 
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ClearAllIcon from "@material-ui/icons/ClearAll";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import ListIcon from "@material-ui/icons/List";
 
 const ref = createRef();
 
 function Component() {
   const [text, setText] = useState("");
-  const [list, setList] = useState([]);
-  const { enqueueSnackbar } = useSnackbar();
+  const [todoList, setTodoList] = useState([]);
+  const [doneList, setDoneList] = useState([]);
 
   useEffect(() => {
-    // read all from sessionStorage
-    setList(sessionStorage.getJson("todolist", []));
+    const list = sessionStorage.getJson("todolist", []);
+    setTodoList(list.filter(({ checked }) => !checked));
+    setDoneList(list.filter(({ checked }) => checked));
   }, []);
 
   useEffect(() => {
-    sessionStorage.setJson("todolist", list);
-  }, [list]);
+    sessionStorage.setJson("todolist", [
+      ...todoList.map((item) => ({ ...item, checked: false })),
+      ...doneList.map((item) => ({ ...item, checked: true })),
+    ]);
+  }, [todoList, doneList]);
 
   const handleAdd = () => {
-    setList([{ id: v1(), checked: false, text }, ...list]);
+    setTodoList([{ id: v1(), text }, ...todoList]);
     setText("");
     ref.current.focus();
   };
 
-  const handleToggle = id => {
-    const copy = list.slice();
-    const index = copy.findIndex(item => item.id === id);
-    if (index !== -1) {
-      copy[index].checked = !copy[index].checked;
-      setList(copy);
-    } else {
-      enqueueSnackbar("Item not found", { variant: "error" });
+  const handleToggle = (id) => {
+    const todoItem = todoList.find((item) => item.id === id);
+    const doneItem = doneList.find((item) => item.id === id);
+    if (todoItem) {
+      setTodoList((list) => list.filter((item) => item.id !== id));
+      setDoneList((list) => [todoItem, ...list]);
+    } else if (doneItem) {
+      setTodoList((list) => [doneItem, ...list]);
+      setDoneList((list) => list.filter((item) => item.id !== id));
     }
   };
 
-  const handleDelete = id => {
-    const copy = list.slice();
-    const index = copy.findIndex(item => item.id === id);
-    if (index !== -1) {
-      copy.splice(index, 1);
-      setList(copy);
-    } else {
-      enqueueSnackbar("Item not found", { variant: "error" });
-    }
+  const handleDelete = (id) => {
+    setTodoList((list) => list.filter((item) => item.id !== id));
+    setDoneList((list) => list.filter((item) => item.id !== id));
   };
 
   const handleBottomAction = (_, action) => {
     if (action === "clear") {
-      setList([]);
+      setTodoList([]);
+      setDoneList([]);
     } else if (action === "fill") {
-      const fill = mock
-        .slice(0, 10)
-        .map(i => ({ ...i, id: v1(), checked: Math.random() < 0.5 }));
-      setList([...list, ...fill]);
+      const fill = mock.slice(0, 10).map((i) => ({ ...i, id: v1() }));
+      while (fill.length > 0) {
+        const [item] = fill.splice(0, 1);
+        if (Math.random() < 0.5) {
+          setTodoList((list) => [...list, item]);
+        } else {
+          setDoneList((list) => [...list, item]);
+        }
+      }
     }
   };
-
-  const todo = list.filter(({ checked }) => !checked);
-  const done = list.filter(({ checked }) => checked);
 
   return (
     <Page
@@ -104,7 +99,7 @@ function Component() {
                     <AddCircleIcon />
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
             value={text}
             onChange={({ target: { value } }) => setText(value)}
@@ -113,29 +108,45 @@ function Component() {
           />
 
           <List
-            subheader={<ListSubheader>To Do ({todo.length})</ListSubheader>}
+            subheader={<ListSubheader>To Do ({todoList.length})</ListSubheader>}
+            update={setTodoList}
+            ContainerProps={{
+              groupName: "1",
+              getChildPayload: (index) => todoList[index],
+            }}
           >
-            {todo.map(item => (
-              <Item
-                key={item.id}
-                {...item}
-                onToggle={handleToggle}
-                onDelete={handleDelete}
-              />
-            ))}
-          </List>
-          <List subheader={<ListSubheader>Done ({done.length})</ListSubheader>}>
-            {done.map(item => (
-              <Item
-                key={item.id}
-                {...item}
-                onToggle={handleToggle}
-                onDelete={handleDelete}
-              />
-            ))}
+            {todoList.map((item) =>
+              mapper({
+                ...item,
+                onToggle: handleToggle,
+                onDelete: handleDelete,
+                checked: false,
+              })
+            )}
           </List>
 
-          <FixedBottomNavigation showLabels onChange={handleBottomAction}>
+          <List
+            subheader={<ListSubheader>Done ({doneList.length})</ListSubheader>}
+            update={setDoneList}
+            ContainerProps={{
+              groupName: "1",
+              getChildPayload: (index) => doneList[index],
+            }}
+          >
+            {doneList.map((item) =>
+              mapper({
+                ...item,
+                onToggle: handleToggle,
+                onDelete: handleDelete,
+                checked: true,
+              })
+            )}
+          </List>
+        </Content>
+      }
+      footer={
+        <Footer separator={<BottomNavigation />}>
+          <BottomNavigation onChange={handleBottomAction}>
             <BottomNavigationAction
               label="Fill"
               value="fill"
@@ -146,23 +157,23 @@ function Component() {
               value="clear"
               icon={<ClearAllIcon />}
             />
-          </FixedBottomNavigation>
-        </Content>
+          </BottomNavigation>
+        </Footer>
       }
     />
   );
 }
 
-function Item({ checked, id, text, onDelete, onToggle }) {
+function mapper({ checked, id, text, onDelete, onToggle }) {
   return (
-    <ListItem button onClick={() => onToggle(id)}>
+    <ListItem key={id} button onClick={() => onToggle(id)}>
       <ListItemIcon>
         <Checkbox disableRipple checked={checked} />
       </ListItemIcon>
       <ListItemText
         primary={text}
         primaryTypographyProps={{
-          color: checked ? "textSecondary" : "initial"
+          color: checked ? "textSecondary" : "initial",
         }}
       />
       <ListItemSecondaryAction>
@@ -177,7 +188,7 @@ function Item({ checked, id, text, onDelete, onToggle }) {
 export const route = {
   path: "/todolist",
   exact: true,
-  component: Component
+  component: Component,
 };
 
 export const drawer = {
@@ -185,7 +196,7 @@ export const drawer = {
   primary: "ToDo List",
   secondary: "",
   icon: <ListIcon />,
-  title: "Open ToDo List app"
+  title: "Open ToDo List app",
 };
 
 const mock = [
@@ -195,5 +206,5 @@ const mock = [
   { text: "Drink water" },
   { text: "Eat healty food" },
   { text: "Make new friends" },
-  { text: "Commit on GitHub" }
+  { text: "Commit on GitHub" },
 ];

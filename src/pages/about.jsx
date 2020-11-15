@@ -6,7 +6,7 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Typography
+  Typography,
 } from "@material-ui/core";
 
 import {
@@ -14,7 +14,7 @@ import {
   Content,
   Header,
   NestedListTypography,
-  Page
+  Page,
 } from "mastro-elfo-mui";
 
 import LogoIcon from "../assets/Logo";
@@ -23,18 +23,18 @@ import { version } from "../version";
 const list = [
   {
     version: "1.6.0",
-    subheader: "Work in progress",
-    list: ["Upgraded components v1.22.0"]
+    subheader: "15 November 2020",
+    list: ["Upgraded components v1.31.0", "ToDo app supports Drag'n'Drop"],
   },
   {
     version: "1.5.0",
     subheader: "24 October 2020",
-    list: ["[NEW] Page with a button that trows an error"]
+    list: ["[NEW] Page with a button that trows an error"],
   },
   {
     version: "1.4.0",
     subheader: "22 October 2020",
-    list: ["[NEW] Use packaged components"]
+    list: ["[NEW] Use packaged components"],
   },
   {
     version: "1.3.0",
@@ -44,8 +44,8 @@ const list = [
       ["Fill some random data", "Clear all data"],
       "Update components (version 1.11.0)",
       ["Fix _dark mode_"],
-      "Stock app shows length or results"
-    ]
+      "Stock app shows length or results",
+    ],
   },
   {
     version: "1.2.0",
@@ -53,8 +53,8 @@ const list = [
     list: [
       "Create **stock** app",
       "Show contrast between primary and secondary color in AppBar",
-      "Upgrade components (v1.9.0)"
-    ]
+      "Upgrade components (v1.9.0)",
+    ],
   },
   {
     version: "1.1.0",
@@ -65,14 +65,14 @@ const list = [
       "Add primary or secondary to color picker title",
       'Fix date pages/about: like "20 September 2020"',
       "Fix settings background color in color picker",
-      "Fix `.gitignore` `todo* > todo.md`"
-    ]
+      "Fix `.gitignore` `todo* > todo.md`",
+    ],
   },
   {
     version: "1.0.0",
     subheader: "10 October 2020",
-    list: ["First deploy", "ToDo List App"]
-  }
+    list: ["First deploy", "ToDo List App"],
+  },
 ];
 
 function Component() {
@@ -94,7 +94,7 @@ function Component() {
 export const route = {
   path: "/about",
   exact: true,
-  component: Component
+  component: Component,
 };
 
 export const drawer = {
@@ -102,7 +102,7 @@ export const drawer = {
   primary: "Demosaur",
   secondary: `v${version}`,
   title: "About Demosaur",
-  icon: <LogoIcon />
+  icon: <LogoIcon />,
 };
 
 function AppCard() {
