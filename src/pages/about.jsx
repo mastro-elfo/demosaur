@@ -22,6 +22,11 @@ import { version } from "../version";
 
 const list = [
   {
+    version: "1.7.0",
+    subheader: "Under development",
+    list: ["Added print functions to Stock app"],
+  },
+  {
     version: "1.6.0",
     subheader: "15 November 2020",
     list: ["Upgraded components v1.31.0", "ToDo app supports Drag'n'Drop"],

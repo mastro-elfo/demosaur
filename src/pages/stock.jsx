@@ -13,10 +13,16 @@ import {
   ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
-  TextField
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
   // Typography
 } from "@material-ui/core";
-import { Collection, pluralize } from "mastro-elfo-mui";
+import { Collection, TableHeadCell, pluralize } from "mastro-elfo-mui";
 
 import AllInboxIcon from "@material-ui/icons/AllInbox";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -34,7 +40,7 @@ function Component() {
       CollectionProps={{
         title: "Stocks",
         ResultListProps: {
-          subheader: r =>
+          subheader: (r) =>
             r
               ? `${r.length} ${pluralize(r.length, "stock", "stocks")} found`
               : "",
@@ -47,15 +53,16 @@ function Component() {
                 <DeleteIcon />
               </ListItemIcon>
             ),
-            onClick: () => push(`/stock/v/${id}`)
-          })
+            onClick: () => push(`/stock/v/${id}`),
+          }),
         },
-        SearchFieldProps: { fullWidth: true }
+        SearchFieldProps: { fullWidth: true },
+        print: printList,
       }}
-      ViewProps={{ render: ViewRender }}
+      ViewProps={{ render: ViewRender, print: printDetail }}
       NewProps={{
         render: NewRender,
-        data: { active: true, barcode: "", description: "", name: "" }
+        data: { active: true, barcode: "", description: "", name: "" },
       }}
       EditProps={{ render: EditRender }}
     />
@@ -64,7 +71,7 @@ function Component() {
 
 export const route = {
   path: "/stock",
-  component: Component
+  component: Component,
 };
 
 export const drawer = {
@@ -72,7 +79,7 @@ export const drawer = {
   primary: "Stock",
   secondary: "",
   icon: <AllInboxIcon />,
-  title: "Open stock app"
+  title: "Open stock app",
 };
 
 function ViewRender(data) {
@@ -111,7 +118,7 @@ function EditRender(data, setData) {
       .then(() => {
         go(-2);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         enqueueSnackbar(err.message, { variant: "error" });
       });
@@ -206,7 +213,7 @@ function NewRender(data, setData) {
 
 function search(q, d) {
   const query = d.trim().toLowerCase();
-  return readAll().then(r =>
+  return readAll().then((r) =>
     r.filter(
       ({ barcode, description, name }) =>
         deburr(barcode.trim().toLowerCase()).indexOf(query) !== -1 ||
@@ -230,6 +237,54 @@ function save(data) {
   }
 }
 
+function printList(data) {
+  return (
+    <TableContainer>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableHeadCell>ID</TableHeadCell>
+            <TableHeadCell>Barcode</TableHeadCell>
+            <TableHeadCell>Name</TableHeadCell>
+            <TableHeadCell>Description</TableHeadCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {!!data &&
+            data.length > 0 &&
+            data.map(({ id, barcode, description, name }) => (
+              <TableRow key={id}>
+                <TableCell>{id}</TableCell>
+                <TableCell>{barcode}</TableCell>
+                <TableCell>{name}</TableCell>
+                <TableCell>{description}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
+function printDetail({ id, barcode, description, name }) {
+  return (
+    <List>
+      <ListItem>
+        <ListItemText primary={id} secondary="ID" />
+      </ListItem>
+      <ListItem>
+        <ListItemText primary={barcode} secondary="Barcode" />
+      </ListItem>
+      <ListItem>
+        <ListItemText primary={name} secondary="Name" />
+      </ListItem>
+      <ListItem>
+        <ListItemText primary={description} secondary="Description" />
+      </ListItem>
+    </List>
+  );
+}
+
 // CRU[D]
 
 function create(data) {
@@ -245,14 +300,14 @@ function create(data) {
 function read(id) {
   return new Promise((res, rej) => {
     const stocks = sessionStorage.getJson("stocks", []);
-    const item = stocks.find(i => i.id === id);
+    const item = stocks.find((i) => i.id === id);
     if (item) res(item);
     else rej(new Error("Item not found"));
   });
 }
 
 function readAll() {
-  return new Promise(res => {
+  return new Promise((res) => {
     res(sessionStorage.getJson("stocks", []));
   });
 }
@@ -260,7 +315,7 @@ function readAll() {
 function update(id, data) {
   return new Promise((res, rej) => {
     const stocks = sessionStorage.getJson("stocks", []);
-    const index = stocks.findIndex(i => i.id === id);
+    const index = stocks.findIndex((i) => i.id === id);
     if (index !== -1) {
       stocks[index] = { ...data, id };
       sessionStorage.setJson("stocks", stocks);
@@ -272,7 +327,7 @@ function update(id, data) {
 function del(id) {
   return new Promise((res, rej) => {
     const stocks = sessionStorage.getJson("stocks", []);
-    const index = stocks.findIndex(i => i.id === id);
+    const index = stocks.findIndex((i) => i.id === id);
     if (index !== -1) {
       stocks.splice(index, 1);
       sessionStorage.setJson("stocks", stocks);
